@@ -1,0 +1,6 @@
+@Sarafaii_HostAddress = http://localhost:5020
+
+GET {{Sarafaii_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
