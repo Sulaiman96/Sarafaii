@@ -27,3 +27,7 @@ body {
     @apply font-bold text-2xl mb-3;
   }
 }
+
+nav{
+  border-radius: 25px;
+}
