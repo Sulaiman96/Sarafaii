@@ -34,7 +34,7 @@ public class AccountController(IMapper mapper, ITokenService tokenService, UserM
             FirstName = user.FirstName,
             LastName = user.LastName,
             UserName = user.Email,
-            Token = await tokenService.CreateToken(user)
+            Token = tokenService.CreateToken(user)
         };
 
         return Ok(userToReturn);
@@ -62,7 +62,7 @@ public class AccountController(IMapper mapper, ITokenService tokenService, UserM
             FirstName = user.FirstName,
             LastName = user.LastName,
             UserName = user.Email,
-            Token = await tokenService.CreateToken(user)
+            Token = tokenService.CreateToken(user)
         };
         
         return Ok(userToReturn);

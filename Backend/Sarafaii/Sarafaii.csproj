@@ -26,4 +26,13 @@
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Seed Data\CurrencySeedData.json" />
+      <_ContentIncludedByDefault Remove="Seed Data\CustomerSeedData.json" />
+      <_ContentIncludedByDefault Remove="Seed Data\DailyRateSeedData.json" />
+      <_ContentIncludedByDefault Remove="Seed Data\ExchangeRateSeedData.json" />
+      <_ContentIncludedByDefault Remove="Seed Data\LedgerSeedData.json" />
+      <_ContentIncludedByDefault Remove="Seed Data\UserSeedData.json" />
+    </ItemGroup>
+
 </Project>

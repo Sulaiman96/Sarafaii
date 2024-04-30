@@ -1,0 +1,52 @@
+﻿[
+  {
+    "Amount": 1500.00,
+    "Date": "2024-03-25",
+    "HasBeenCollected": true,
+    "CurrencyId": 1,
+    "Rate": 1.25,
+    "FromCustomerId": 1,
+    "ToCustomerId": 2,
+    "UserId": 1
+  },
+  {
+    "Amount": 2000.00,
+    "Date": "2024-03-21",
+    "HasBeenCollected": false,
+    "CurrencyId": 2,
+    "Rate": 1.00,
+    "FromCustomerId": 3,
+    "ToCustomerId": 4,
+    "UserId": 1
+  },
+  {
+    "Amount": 3000.00,
+    "Date": "2024-03-20",
+    "HasBeenCollected": false,
+    "CurrencyId": 3,
+    "Rate": 85.00,
+    "FromCustomerId": 5,
+    "ToCustomerId": 6,
+    "UserId": 1
+  },
+  {
+    "Amount": 1000.00,
+    "Date": "2024-03-22",
+    "HasBeenCollected": false,
+    "CurrencyId": 4,
+    "Rate": 75.50,
+    "FromCustomerId": 2,
+    "ToCustomerId": 1,
+    "UserId": 1
+  },
+  {
+    "Amount": 500.00,
+    "Date": "2024-03-18",
+    "HasBeenCollected": true,
+    "CurrencyId": 5,
+    "Rate": 7.10,
+    "FromCustomerId": 4,
+    "ToCustomerId": 3,
+    "UserId": 1
+  }
+]

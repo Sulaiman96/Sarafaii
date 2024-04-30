@@ -1,0 +1,50 @@
+﻿[
+  {
+    "CurrencyId": 1,
+    "Date": "2023-03-15",
+    "Rate": 1.25,
+    "UserId": 2
+  },
+  {
+    "CurrencyId": 2,
+    "Date": "2023-03-15",
+    "Rate": 1.00,
+    "UserId": 2
+  },
+  {
+    "CurrencyId": 3,
+    "Date": "2023-03-15",
+    "Rate": 75.00,
+    "UserId": 2
+  },
+  {
+    "CurrencyId": 4,
+    "Date": "2023-03-15",
+    "Rate": 82.50,
+    "UserId": 2
+  },
+  {
+    "CurrencyId": 5,
+    "Date": "2023-03-15",
+    "Rate": 7.15,
+    "UserId": 2
+  },
+  {
+    "CurrencyId": 6,
+    "Date": "2023-03-15",
+    "Rate": 0.95,
+    "UserId": 2
+  },
+  {
+    "CurrencyId": 7,
+    "Date": "2023-03-15",
+    "Rate": 200.00,
+    "UserId": 2
+  },
+  {
+    "CurrencyId": 8,
+    "Date": "2023-03-15",
+    "Rate": 60.00,
+    "UserId": 2
+  }
+]

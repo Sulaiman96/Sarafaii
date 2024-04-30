@@ -1,0 +1,34 @@
+﻿[
+  {
+    "Name":"Pound",
+    "Country": "United Kingdom"
+  },
+  {
+    "Name":"Dollar",
+    "Country": "United States"
+  },
+  {
+    "Name":"Afghani",
+    "Country": "Afghanistan"
+  },
+  {
+    "Name":"Indian Rupee",
+    "Country": "India"
+  },
+  {
+    "Name":"Renminbi",
+    "Country": "China"
+  },
+  {
+    "Name":"Euro",
+    "Country": "France"
+  },
+  {
+    "Name":"Pakistani Rupee",
+    "Country": "Pakistan"
+  },
+  {
+    "Name":"Ruble",
+    "Country": "Russia"
+  }
+]

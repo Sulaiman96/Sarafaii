@@ -1,0 +1,42 @@
+﻿[
+  {
+    "Rate": 0.82,
+    "LastUpdated": "2024-03-15",
+    "CurrencyId": 1
+  },
+  {
+    "Rate": 1.00,
+    "LastUpdated": "2024-03-15",
+    "CurrencyId": 2
+  },
+  {
+    "Rate": 79.22,
+    "LastUpdated": "2024-03-15",
+    "CurrencyId": 3
+  },
+  {
+    "Rate": 74.68,
+    "LastUpdated": "2024-03-15",
+    "CurrencyId": 4
+  },
+  {
+    "Rate": 7.10,
+    "LastUpdated": "2024-03-15",
+    "CurrencyId": 5
+  },
+  {
+    "Rate": 0.96,
+    "LastUpdated": "2024-03-15",
+    "CurrencyId": 6
+  },
+  {
+    "Rate": 204.38,
+    "LastUpdated": "2024-03-15",
+    "CurrencyId": 7
+  },
+  {
+    "Rate": 71.33,
+    "LastUpdated": "2024-03-15",
+    "CurrencyId": 8
+  }
+]

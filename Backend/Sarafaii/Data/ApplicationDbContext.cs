@@ -22,16 +22,17 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions) : IdentityD
             .HasForeignKey(ur => ur.UserId)
             .IsRequired();
         
+        builder.Entity<AppUser>()
+            .HasOne(u => u.Ledger)
+            .WithOne(l => l.User)
+            .HasForeignKey<Ledger>(l => l.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
         builder.Entity<AppRole>()
             .HasMany(ur => ur.UserRoles)
             .WithOne(u => u.Role)
             .HasForeignKey(ur => ur.RoleId)
             .IsRequired();
-        
-        builder.Entity<Ledger>()
-            .HasOne(l => l.DailyRate)
-            .WithMany()
-            .HasForeignKey(l => new { l.DailyRateCurrencyId, l.DailyRateDate, l.DailyRateUserId });
 
         builder.Entity<Ledger>()
             .HasOne(l => l.User)
@@ -41,12 +42,14 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions) : IdentityD
         builder.Entity<Ledger>()
             .HasOne(l => l.FromCustomer)
             .WithMany()
-            .HasForeignKey(l => l.FromCustomerId);
+            .HasForeignKey(l => l.FromCustomerId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.Entity<Ledger>()
             .HasOne(l => l.ToCustomer)
             .WithMany()
-            .HasForeignKey(l => l.ToCustomerId);
+            .HasForeignKey(l => l.ToCustomerId)
+            .OnDelete(DeleteBehavior.Restrict);
         
         builder.Entity<Ledger>()
             .HasOne(l => l.Currency)
