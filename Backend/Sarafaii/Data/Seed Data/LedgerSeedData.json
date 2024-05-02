@@ -7,7 +7,7 @@
     "Rate": 1.25,
     "FromCustomerId": 1,
     "ToCustomerId": 2,
-    "UserId": 1
+    "UserId": 2
   },
   {
     "Amount": 2000.00,
@@ -17,7 +17,7 @@
     "Rate": 1.00,
     "FromCustomerId": 3,
     "ToCustomerId": 4,
-    "UserId": 1
+    "UserId": 2
   },
   {
     "Amount": 3000.00,
@@ -27,7 +27,7 @@
     "Rate": 85.00,
     "FromCustomerId": 5,
     "ToCustomerId": 6,
-    "UserId": 1
+    "UserId": 2
   },
   {
     "Amount": 1000.00,
@@ -37,7 +37,7 @@
     "Rate": 75.50,
     "FromCustomerId": 2,
     "ToCustomerId": 1,
-    "UserId": 1
+    "UserId": 2
   },
   {
     "Amount": 500.00,
@@ -47,6 +47,6 @@
     "Rate": 7.10,
     "FromCustomerId": 4,
     "ToCustomerId": 3,
-    "UserId": 1
+    "UserId": 2
   }
 ]

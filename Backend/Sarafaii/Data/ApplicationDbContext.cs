@@ -10,6 +10,8 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions) : IdentityD
 {
     public DbSet<Currency> Currencies { get; set; }
     public DbSet<ExchangeRate> ExchangeRates { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<DailyRate> DailyRates { get; set; }
     public DbSet<Ledger> Ledgers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -23,9 +25,9 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions) : IdentityD
             .IsRequired();
         
         builder.Entity<AppUser>()
-            .HasOne(u => u.Ledger)
+            .HasMany(u => u.Ledgers)
             .WithOne(l => l.User)
-            .HasForeignKey<Ledger>(l => l.UserId)
+            .HasForeignKey(l => l.UserId)
             .OnDelete(DeleteBehavior.Cascade);
         
         builder.Entity<AppRole>()
@@ -36,8 +38,8 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions) : IdentityD
 
         builder.Entity<Ledger>()
             .HasOne(l => l.User)
-            .WithOne(u => u.Ledger)
-            .HasForeignKey<Ledger>(l => l.UserId);
+            .WithMany(u => u.Ledgers)
+            .HasForeignKey(l => l.UserId);
         
         builder.Entity<Ledger>()
             .HasOne(l => l.FromCustomer)
@@ -55,11 +57,19 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions) : IdentityD
             .HasOne(l => l.Currency)
             .WithMany() 
             .HasForeignKey(l => l.CurrencyId);
+        
+        builder.Entity<Ledger>()
+            .Property(l => l.Date)
+            .HasColumnType("date");
 
         builder.Entity<ExchangeRate>()
             .HasOne(er => er.Currency)
             .WithMany()
             .HasForeignKey(er => er.CurrencyId);
+        
+        builder.Entity<ExchangeRate>()
+            .Property(er => er.LastUpdated)
+            .HasColumnType("date");
         
         builder.Entity<DailyRate>()
             .HasOne(dr => dr.Currency)
@@ -71,9 +81,37 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions) : IdentityD
             .WithMany(u => u.DailyRates)
             .HasForeignKey(dr => dr.UserId);
         
+        builder.Entity<DailyRate>()
+            .Property(dr => dr.Date)
+            .HasColumnType("date");
+        
         builder.Entity<Customer>()
             .HasOne(c => c.User)
             .WithMany(u => u.Customers)
             .HasForeignKey(c => c.UserId);
+        
+        builder.Entity<Customer>()
+            .Property(c => c.DateOfBirth)
+            .HasColumnType("date");
+    }
+    
+    public void ResetAutoIncrementValues()
+    {
+        var tables = new[]
+        {
+            "Ledgers",
+            "ExchangeRates",
+            "Customers",
+            "Currencies",
+            "AspNetUsers",
+            "AspNetUserClaims",
+            "AspNetRoles",
+            "AspNetRoleClaims"
+        }; 
+        
+        foreach (var table in tables)
+        {
+            Database.ExecuteSqlRaw($"DBCC CHECKIDENT ('{table}', RESEED, 1);");
+        }
     }
 }

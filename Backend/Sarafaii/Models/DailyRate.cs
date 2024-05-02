@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sarafaii.Models;
 
@@ -7,6 +8,7 @@ public class DailyRate
 {
     public int CurrencyId { get; set; }
     public Currency Currency { get; set; }
+    [Column(TypeName = "date")]
     public DateTime Date { get; set; }
     public decimal Rate { get; set; }
     

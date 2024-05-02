@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Collections;
+using Microsoft.AspNetCore.Identity;
 
 namespace Sarafaii.Models;
 
@@ -9,5 +10,5 @@ public class AppUser : IdentityUser<int>
     public ICollection<AppUserRole> UserRoles { get; set; }
     public ICollection<DailyRate> DailyRates { get; set; }
     public ICollection<Customer> Customers { get; set; }
-    public Ledger Ledger { get; set; }
+    public ICollection<Ledger> Ledgers { get; set; }
 }
