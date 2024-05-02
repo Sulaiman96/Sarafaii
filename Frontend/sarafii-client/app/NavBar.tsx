@@ -1,8 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import BrandLogo from "./BrandLogo";
+import { usePathname } from "next/navigation";
+import classNames from "classnames";
 
 const navbar = () => {
+  const currentPath = usePathname();
+
   const links = [
     { label: "Dashboard", href: "/" },
     { label: "Customers", href: "/customers" },
@@ -25,7 +31,11 @@ const navbar = () => {
         {links.map((link) => (
           <Link
             key={link.href}
-            className="text-base-100 hover:text-accent transition-colors"
+            className={classNames({
+              "text-accent ": link.href === currentPath,
+              "text-base-100": link.href !== currentPath,
+              "text-base-100 hover:text-accent transition-colors": true,
+            })}
             href={link.href}
           >
             {link.label}
