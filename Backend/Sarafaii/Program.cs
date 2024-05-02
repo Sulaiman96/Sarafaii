@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Sarafaii.Data;
 using Sarafaii.Extensions;
+using Sarafaii.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -13,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 {
     app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod()
-        .WithOrigins("https://localhost:3000", "http://localhost:3000"));
+        .WithOrigins("https://localhost:3000", "http://localhost:3000", "http://localhost:3001"));
     app.UseAuthentication();
     app.UseAuthorization();
     app.MapControllers();
@@ -22,13 +24,24 @@ var app = builder.Build();
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
+        var userManager = services.GetRequiredService<UserManager<AppUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+        
         await context.Database.MigrateAsync();
+        Seed.ResetAutoIncrement(context);
+
+        await Seed.SeedUsers(userManager, roleManager);
+        await Seed.SeedCurrency(context);
+        await Seed.SeedExchangeRate(context);
+        await Seed.SeedCustomer(context, userManager);
+        await Seed.SeedDailyRate(context, userManager);
+        await Seed.SeedLedger(context, userManager);
+
     }catch (Exception ex)
     {
         var logger = services.GetService<ILogger<Program>>();
         logger.LogError(ex, "An error occured during migration");
     }
     
-
     app.Run();
 }
