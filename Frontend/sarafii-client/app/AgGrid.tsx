@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { useState, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
@@ -8,14 +8,32 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 
 const AgGrid = () => {
   const [columnDefs] = useState([
-    { headerName: "Amount", field: "amount" },
-    { headerName: "Date", field: "date" },
-    { headerName: "Currency", field: "currency" },
-    { headerName: "Rate", field: "rate" },
+    {
+      field: "amount",
+      valueFormatter: (p: { value: number }) =>
+        "£" + p.value.toFixed(2).toString(),
+    },
+    {
+      field: "date",
+      valueFormatter: (p: { value: string }) => p.value.split("T")[0],
+    },
+    {
+      field: "currency",
+    },
+    {
+      field: "rate",
+      valueFormatter: (p: { value: number }) => p.value.toFixed(5),
+    },
     { headerName: "From Customer", field: "fromCustomer.fullName" },
     { headerName: "To Customer", field: "toCustomer.fullName" },
     { headerName: "Has Been Collected", field: "hasBeenCollected" },
   ]);
+
+  const defaultColDef = useMemo(() => {
+    return {
+      flex: 1,
+    };
+  }, []);
 
   const [rowData, setRowData] = useState([]);
 
@@ -32,6 +50,7 @@ const AgGrid = () => {
         rowData={rowData}
         columnDefs={columnDefs}
         style={{ height: "120%", width: "100%" }}
+        defaultColDef={defaultColDef}
       ></AgGridReact>
     </div>
   );
