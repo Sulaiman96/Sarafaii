@@ -37,6 +37,10 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions) : IdentityD
             .IsRequired();
 
         builder.Entity<Ledger>()
+            .Property(l => l.Id)
+            .ValueGeneratedOnAdd();
+
+        builder.Entity<Ledger>()
             .HasOne(l => l.User)
             .WithMany(u => u.Ledgers)
             .HasForeignKey(l => l.UserId);
@@ -93,6 +97,10 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions) : IdentityD
         builder.Entity<Customer>()
             .Property(c => c.DateOfBirth)
             .HasColumnType("date");
+        
+        builder.Entity<Customer>()
+            .Property(l => l.Id)
+            .ValueGeneratedOnAdd();
     }
     
     public void ResetAutoIncrementValues()
