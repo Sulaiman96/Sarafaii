@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Sarafaii.DTOs;
 using Sarafaii.Models;
 using Sarafaii.Services;
+using LoginRequest = Sarafaii.DTOs.LoginRequest;
+using RegisterRequest = Sarafaii.DTOs.RegisterRequest;
 
 namespace Sarafaii.Controllers;
 
@@ -14,8 +16,8 @@ public class AccountController(IMapper mapper, ITokenService tokenService, UserM
     [HttpPost("register")]
     public async Task<ActionResult<UserResponse>> Register(RegisterRequest registerRequest)
     {
-        if (await UserExists(registerRequest.Email))
-            return BadRequest("Email Already Exists");
+        if (await UserExists(registerRequest.UserName))
+            return BadRequest("Username Already Exists");
 
         var user = Mapper.Map<AppUser>(registerRequest);
         
@@ -33,26 +35,26 @@ public class AccountController(IMapper mapper, ITokenService tokenService, UserM
         {
             FirstName = user.FirstName,
             LastName = user.LastName,
-            UserName = user.Email,
+            UserName = user.UserName,
             Token = tokenService.CreateToken(user)
         };
 
         return Ok(userToReturn);
     }
 
-    private async Task<bool> UserExists(string email)
+    private async Task<bool> UserExists(string userName)
     {
-        return await userManager.Users.AnyAsync(x => x.UserName == email);
+        return await userManager.Users.AnyAsync(x => x.UserName == userName);
     }
 
     
     [HttpPost("login")]
     public async Task<ActionResult<UserResponse>> Login(LoginRequest loginRequest)
     {
-        if (!await UserExists(loginRequest.Email))
-            return Unauthorized("Email Does Not Exist");
+        if (!await UserExists(loginRequest.UserName))
+            return Unauthorized("Username Does Not Exist");
 
-        var user = await userManager.Users.FirstOrDefaultAsync(user => user.UserName == loginRequest.Email);
+        var user = await userManager.Users.FirstOrDefaultAsync(user => user.UserName == loginRequest.UserName);
 
         if (user == null)
             return Unauthorized("Password Is Wrong");
@@ -61,7 +63,7 @@ public class AccountController(IMapper mapper, ITokenService tokenService, UserM
         {
             FirstName = user.FirstName,
             LastName = user.LastName,
-            UserName = user.Email,
+            UserName = user.UserName,
             Token = tokenService.CreateToken(user)
         };
         
