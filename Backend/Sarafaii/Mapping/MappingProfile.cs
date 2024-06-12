@@ -19,5 +19,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.ProfilePictureUrl, opt => opt.MapFrom(src => src.ProfilePictureUrl))
             .ForMember(dest => dest.BirthCertificateUrl, opt => opt.MapFrom(src => src.BirthCertificateUrl));
 
+        CreateMap<RegisterRequest, AppUser>();
+
     }
 }

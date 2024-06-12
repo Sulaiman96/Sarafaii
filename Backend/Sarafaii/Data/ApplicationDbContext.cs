@@ -30,6 +30,10 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions) : IdentityD
             .HasForeignKey(l => l.UserId)
             .OnDelete(DeleteBehavior.Cascade);
         
+        builder.Entity<AppUser>()
+            .Property(l => l.Id)
+            .ValueGeneratedOnAdd();
+        
         builder.Entity<AppRole>()
             .HasMany(ur => ur.UserRoles)
             .WithOne(u => u.Role)
