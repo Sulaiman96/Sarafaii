@@ -1,6 +1,5 @@
 using System.Security.Claims;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sarafaii.Data;
@@ -78,6 +77,28 @@ public class LedgerController(IMapper mapper, ApplicationDbContext dbContext) : 
         var ledgerDto = mapper.Map<LedgerResponse>(ledger);
         
         return CreatedAtAction(nameof(GetById), new {id = ledger.Id}, ledgerDto);
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> Post(int id, UpdateLedgerRequest updateLedgerRequest)
+    {
+        var ledgerEntry = dbContext.Ledgers.FirstOrDefault(x => x.Id == id);
+
+        if (ledgerEntry == null)
+        {
+            return NotFound($"Ledger Entry with Id: {id} not found.");
+        }
+
+        mapper.Map(updateLedgerRequest, ledgerEntry);
+        try
+        {
+            await dbContext.SaveChangesAsync();
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest($"Was not able to save Ledger Entry: {ex.Message}" );
+        }
     }
 
     private async Task<Customer> GetCustomer(CustomerDto ledgerRequestFromCustomer)

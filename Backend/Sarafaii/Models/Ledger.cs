@@ -9,6 +9,8 @@ public class Ledger
     public decimal Amount { get; set; }
     [Column(TypeName = "date")]
     public DateTime Date { get; set; }
+
+    public DateTime? DateCollected { get; set; }
     public bool HasBeenCollected { get; set; }
     public decimal Rate { get; set; }
 
