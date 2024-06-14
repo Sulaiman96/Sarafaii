@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import AgGrid from "./AgGrid";
 import { Button } from "@radix-ui/themes";
-import AddButton from "./components/AddButtonComponent/AddButton";
+import LedgerEntryDialog from "./components/LedgerEntryDialogComponent/LedgerEntryDialog";
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
           </Button>
         </div>
         <div className="">
-          <AddButton />
+          <LedgerEntryDialog />
         </div>
       </div>
       <AgGrid />
